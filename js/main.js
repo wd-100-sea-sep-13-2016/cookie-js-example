@@ -32,3 +32,26 @@ if (cookieKeys.length === 0) {
 	// append the cookie list
 	$cookies.append($cookieList);
 }
+
+
+
+
+// set up a click handler that will take the key and value input
+// element values, save them in a cookie, then refresh the page
+$('#save').click(function(eventObject) {
+	var key = $('#key').val();
+	var value = $('#value').val();
+
+	// check if there was a previous value
+	var previousValue = Cookies.get(key);
+
+	if (previousValue) {
+		alert('Overwriting previous cookie value of \"' + previousValue + "\"!");
+	}
+
+	// save the new value
+	Cookies.set(key, value);
+
+	// refresh the page
+	window.location.reload();
+})
