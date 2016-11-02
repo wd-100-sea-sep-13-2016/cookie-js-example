@@ -36,6 +36,27 @@ if (cookieKeys.length === 0) {
 
 
 
+// check for the last visit epoch time
+// if you don't know what this is, see: https://en.wikipedia.org/wiki/Unix_time
+// for details on how to use the JavaScript Date object, see:
+//   https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date
+var lastVisit = Cookies.get('lastVisit');
+
+if (lastVisit) {
+	// if there is a value, display a message
+	// not that cookie values are strings, so they must be converted
+	$('#lastVisit').html("Your last visit was " + new Date(parseInt(lastVisit)));
+}
+
+// if there was no value, they have not been here before
+// save a value so they get a nice message next time
+// even if they have been here before, update the lastVisit
+// time so the message is always accurate
+Cookies.set('lastVisit', Date.now());
+
+
+
+
 // set up a click handler that will take the key and value input
 // element values, save them in a cookie, then refresh the page
 $('#save').click(function() {
