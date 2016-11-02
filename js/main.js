@@ -38,7 +38,7 @@ if (cookieKeys.length === 0) {
 
 // set up a click handler that will take the key and value input
 // element values, save them in a cookie, then refresh the page
-$('#save').click(function(eventObject) {
+$('#save').click(function() {
 	var key = $('#key').val();
 	var value = $('#value').val();
 
@@ -54,4 +54,29 @@ $('#save').click(function(eventObject) {
 
 	// refresh the page
 	window.location.reload();
-})
+});
+
+
+
+
+// any existing cookies should have been added to the DOM in a list item
+// by this point...
+// add a click handler that will delete the cookie
+$('li').click(function() {
+	// the inner HTML should look like "key: value"
+	var innerHTML = $(this).html();
+
+	// this will split the inner HTML into an array
+	// [0]: "key"
+	// [1]: " value"
+	var tokens = innerHTML.split(':');
+
+	// get the key
+	var key = tokens[0];
+
+	// delete the cookie
+	Cookies.remove(key);
+
+	// refresh the page
+	window.location.reload();
+});
